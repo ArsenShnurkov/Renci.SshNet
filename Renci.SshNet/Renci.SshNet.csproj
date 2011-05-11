@@ -8,8 +8,8 @@
     <ProjectGuid>{2F5F8C90-0BD1-424F-997C-7BC6280919D1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Renci.SshClient</RootNamespace>
-    <AssemblyName>Renci.SshClient</AssemblyName>
+    <RootNamespace>Renci.SshNet</RootNamespace>
+    <AssemblyName>Renci.SshNet</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Renci.SshClient.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Renci.SshNet.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Renci.SshClient.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Renci.SshNet.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugNoTimeout|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +51,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <DocumentationFile>bin\DebugNoTimeout\Renci.SshClient.XML</DocumentationFile>
+    <DocumentationFile>bin\DebugNoTimeout\Renci.SshNet.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -173,7 +173,7 @@
     <Compile Include="ForwardedPort.cs" />
     <Compile Include="ForwardedPortLocal.cs" />
     <Compile Include="ForwardedPortRemote.cs" />
-    <Compile Include="Messages\Connection\GlobalRequestNames.cs" />
+    <Compile Include="Messages\Connection\GlobalRequestName.cs" />
     <Compile Include="Security\Algorithm.cs" />
     <Compile Include="Security\Cipher.cs" />
     <Compile Include="Security\CipherAESCBC.cs" />
@@ -247,7 +247,7 @@
     <Compile Include="Messages\Connection\GlobalRequestMessage.cs" />
     <Compile Include="Messages\Connection\RequestFailureMessage.cs" />
     <Compile Include="Messages\Connection\RequestSuccessMessage.cs" />
-    <Compile Include="Messages\ServiceNames.cs" />
+    <Compile Include="Messages\ServiceName.cs" />
     <Compile Include="Messages\Transport\ServiceRequestMessage.cs" />
     <Compile Include="Messages\Transport\DebugMessage.cs" />
     <Compile Include="Messages\Transport\IgnoreMessage.cs" />
@@ -270,7 +270,7 @@
     <Compile Include="Messages\Transport\NewKeysMessage.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Messages\Transport\DisconnectReasons.cs" />
+    <Compile Include="Messages\Transport\DisconnectReason.cs" />
     <Compile Include="Messages\Transport\UnimplementedMessage.cs" />
     <Compile Include="Messages\Authentication\BannerMessage.cs" />
     <Compile Include="Messages\Authentication\FailureMessage.cs" />

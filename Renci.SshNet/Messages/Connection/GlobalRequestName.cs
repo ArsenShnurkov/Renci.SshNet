@@ -1,9 +1,9 @@
-﻿namespace Renci.SshClient.Messages.Connection
+﻿namespace Renci.SshNet.Messages.Connection
 {
     /// <summary>
     /// Specifies supported request names.
     /// </summary>
-    public enum GlobalRequestNames
+    public enum GlobalRequestName
     {
         /// <summary>
         /// tcpip-forward

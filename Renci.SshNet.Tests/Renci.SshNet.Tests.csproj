@@ -9,8 +9,8 @@
     <ProjectGuid>{C45379B9-17B1-4E89-BC2E-6D41726413E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Renci.SshClient.Tests</RootNamespace>
-    <AssemblyName>Renci.SshClient.Tests</AssemblyName>
+    <RootNamespace>Renci.SshNet.Tests</RootNamespace>
+    <AssemblyName>Renci.SshNet.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -81,7 +81,7 @@
     <Compile Include="SshClientTests\TestSshCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Renci.SshClient\Renci.SshClient.csproj">
+    <ProjectReference Include="..\Renci.SshNet\Renci.SshNet.csproj">
       <Project>{2F5F8C90-0BD1-424F-997C-7BC6280919D1}</Project>
       <Name>Renci.SshClient</Name>
     </ProjectReference>
