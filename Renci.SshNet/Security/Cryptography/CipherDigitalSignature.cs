@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
-using Renci.SshNet.Common;
 
 namespace Renci.SshNet.Security.Cryptography
 {
     /// <summary>
-    /// Implements RSAdigital signature algorithm.
+    /// Implements digital signature where where asymmetric cipher is used,
     /// </summary>
-    public class RSADigitalSignature : DigitalSignature
+    public class CipherDigitalSignature : DigitalSignature
     {
         private HashAlgorithm _hash;
-        private RSACipher _cipher;
+
+        private AsymmetricCipher _cipher;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RSADigitalSignature"/> class.
+        /// Initializes a new instance of the <see cref="CipherDigitalSignature"/> class.
         /// </summary>
-        /// <param name="key">The key.</param>
-        public RSADigitalSignature(RSAPublicKey key)
+        /// <param name="hash">The hash.</param>
+        /// <param name="cipher">The cipher.</param>
+        public CipherDigitalSignature(HashAlgorithm hash, AsymmetricCipher cipher)
         {
-            this._hash = new SHA1Hash();
-            this._cipher = new RSACipher(this._hash, key);
+            this._hash = hash;
+            this._cipher = cipher;
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace Renci.SshNet.Security.Cryptography
         /// <returns></returns>
         public override bool VerifySignature(byte[] input, byte[] signature)
         {
-            var sig = this._cipher.Transform(signature);
+            var sig = this._cipher.Decrypt(signature);
 
             //  TODO:   Ensure that only 1 or 2 types are supported
             var position = 1;
@@ -46,7 +47,7 @@ namespace Renci.SshNet.Security.Cryptography
 
             Array.Copy(sig, position, sig1, 0, sig1.Length);
 
-            var hashData = this._hash.ComputeHash(input);
+            var hashData = this.Hash(input);
 
             var expected = DerEncode(hashData);
 
@@ -70,7 +71,7 @@ namespace Renci.SshNet.Security.Cryptography
         public override byte[] CreateSignature(byte[] input)
         {
             //  Calculate hash value
-            var hashData = this._hash.ComputeHash(input);
+            var hashData = this.Hash(input);
 
             //  Calculate DER string
 
@@ -87,12 +88,20 @@ namespace Renci.SshNet.Security.Cryptography
 
             Array.Copy(dd.ToArray(), 0, rsaInputBlockSize, rsaInputBlockSize.Length - dd.Count, dd.Count);
 
-            var input1 = new BigInteger(rsaInputBlockSize.Reverse().ToArray());
-
-            return this._cipher.Transform(input1).ToByteArray().Reverse().TrimLeadingZero().ToArray();
+            return this._cipher.Encrypt(rsaInputBlockSize).TrimLeadingZero().ToArray();
         }
 
-        private static List<byte> DerEncode(byte[] hashData)
+        /// <summary>
+        /// Hashes the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns></returns>
+        protected byte[] Hash(byte[] input)
+        {
+            return this._hash.ComputeHash(input);
+        }
+
+        protected static List<byte> DerEncode(byte[] hashData)
         {
             //  TODO:   Replace with algorithm code
             var algorithm = new byte[] { 6, 5, 43, 14, 3, 2, 26 };
